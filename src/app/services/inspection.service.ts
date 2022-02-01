@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InspectionService {
-  private readonly Uri = `http://localhost:5118/api`;
+  private readonly Uri = `https://localhost:7118/api`;
 
   constructor(private http: HttpClient) { }
 
@@ -71,4 +71,5 @@ export class InspectionService {
   public deleteStatus(id: number) {
     return this.http.get(`${this.Uri}/Status/${id}`)
   }
+
 }
