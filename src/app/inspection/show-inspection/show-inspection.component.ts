@@ -48,4 +48,41 @@ export class ShowInspectionComponent implements OnInit {
     }
   }
 
+  modalClose() {
+    this.activateAditInspectionComponent = false;
+    this.inspectionList$ = this.inspectionService.getInspections();
+  }
+
+  onEdit(id: number) {
+    this.modalTitle = 'Update Inspection';
+    this.activateAditInspectionComponent = true;
+    document.getElementById('#staticBackdrop')?.click();
+    this.inspection = this.inspectionService.getInspection(id).subscribe(res => {
+      this.showAlert('sucess', 'alert-success');
+    }, err => {
+      this.showAlert('error occured while processing', 'alert-danger');
+    });
+  }
+
+  onDelete(id: number) {
+    this.inspectionService.deleteInspection(id).subscribe(res => {
+      this.showAlert('sucess', 'alert-success');
+    }, err => {
+      this.showAlert('error occured while processing', 'alert-danger');
+    });
+  }
+
+
+  showAlert(msg: string, type: string) {
+    let alert = document.getElementById(type);
+    if (alert) {
+      alert.style.display = 'block';
+      alert.textContent = msg;
+    }
+    setTimeout(() => {
+      if (alert) {
+        alert.style.display = 'none';
+      }
+    }, 4000)
+  }
 }

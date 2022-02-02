@@ -30,4 +30,52 @@ export class AditInspectionComponent implements OnInit {
     this.inspectionTypeList$ = this.inspectionService.getInspectionTypes();
   }
 
+  onSubmit() {
+    let model: any = {
+      status: this.status,
+      comments: this.comments,
+      inspectionTypeId: this.inspectionTypeId
+    }
+    console.log(model)
+    if (this.id == 0) {
+      this.inspectionService.addInspection(model).subscribe(res => {
+        this.close();
+        this.showAlert('Inspection successfully added!', 'alert-success');
+      }, err => {
+        console.log(err);
+        this.showAlert('Some error occurred while processing.', 'alert-danger');
+      });
+    }
+    else {
+      model.id = this.id;
+      this.inspectionService.updateInspection(this.id, model).subscribe(res => {
+        this.close();
+        this.showAlert('Inspection successfully updated!', 'alert-success');
+      }, err => {
+        this.showAlert('Some error occurred while processing.', 'alert-danger');
+      });
+    }
+
+  }
+
+  close() {
+    let closeModalBtn = document.getElementById('adit-modal-close');
+    if (closeModalBtn) {
+      closeModalBtn.click();
+    }
+  }
+
+  showAlert(msg: string, type: string) {
+    let alert = document.getElementById(type);
+    if (alert) {
+      alert.style.display = 'block';
+      alert.textContent = msg;
+    }
+    setTimeout(() => {
+      if (alert) {
+        alert.style.display = 'none';
+      }
+    }, 4000)
+  }
+
 }

@@ -1,0 +1,26 @@
+#alert-success,
+#alert-warning,
+#alert-danger,
+#alert-info{
+  display: none;
+}
+
+#alert-success,
+#alert-warning,
+#alert-danger,
+#alert-info{
+  animation-name: fadeInOut;
+  animation-duration: 4s;
+}
+
+@keyframes fadeInOut {
+  0% {opacity: 0;}
+  50% {opacity: 1;}
+  10% {opacity: 0;}
+}
+
+@-webkit-keyframes fadeInOut {
+  0% {opacity: 0;}
+  50% {opacity: 1;}
+  10% {opacity: 0;}
+}
