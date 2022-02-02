@@ -38,13 +38,13 @@ export class ShowInspectionComponent implements OnInit {
   }
 
   modalAdd(): void {
-    this.modalTitle = 'Add Inspection';
     this.activateAditInspectionComponent = true;
-    this.inspection = {
-      id: 0,
-      status: null,
-      comments: null,
-      inspectionTypeId: null
+      this.modalTitle = 'Add Inspection';
+      this.inspection = {
+        id: 0,
+        status: null,
+        comments: null,
+        inspectionTypeId: null
     }
   }
 
@@ -53,20 +53,16 @@ export class ShowInspectionComponent implements OnInit {
     this.inspectionList$ = this.inspectionService.getInspections();
   }
 
-  onEdit(id: number) {
+  onEdit(item: any) {
     this.modalTitle = 'Update Inspection';
     this.activateAditInspectionComponent = true;
-    document.getElementById('#staticBackdrop')?.click();
-    this.inspection = this.inspectionService.getInspection(id).subscribe(res => {
-      this.showAlert('sucess', 'alert-success');
-    }, err => {
-      this.showAlert('error occured while processing', 'alert-danger');
-    });
+    this.inspection = item;
   }
 
   onDelete(id: number) {
     this.inspectionService.deleteInspection(id).subscribe(res => {
       this.showAlert('sucess', 'alert-success');
+      this.ngOnInit();
     }, err => {
       this.showAlert('error occured while processing', 'alert-danger');
     });

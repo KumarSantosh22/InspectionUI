@@ -27,7 +27,7 @@ export class InspectionService {
   }
 
   public deleteInspection(id: number){
-    return this.http.get(`${this.Uri}/${id}`)
+    return this.http.get(`${this.Uri}/Inspections/${id}`)
   }
 
   // Inspection Types
